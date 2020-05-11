@@ -5,7 +5,7 @@ function config () {
 		stage: 'dev',
 	})
 
-	configuration.accountId = '065185725587'
+	configuration.accountId = '140023301445'
 
 	return configuration
 }
