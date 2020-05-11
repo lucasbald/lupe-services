@@ -1,0 +1,4 @@
+- Effect: Allow
+  Action:
+  - ssm:GetParameters
+  Resource: "*"

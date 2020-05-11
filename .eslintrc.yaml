@@ -1,0 +1,30 @@
+extends: airbnb-base
+env:
+  node: true
+  mocha: true
+rules:
+  no-tabs: 0
+  no-use-before-define: 0
+  no-unused-expressions: 0
+  indent:
+    - error
+    - tab
+    - SwitchCase: 1
+  semi:
+    - error
+    - never
+  max-len:
+    - error
+    - code: 200
+  max-lines:
+    - error
+    - max: 450
+  complexity:
+    - error
+    - max: 8
+  no-multiple-empty-lines:
+    - error
+    - max: 1
+  space-before-function-paren:
+    - error
+    - always

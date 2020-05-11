@@ -1,0 +1,10 @@
+service: ${self:custom.config.name}
+
+functions:
+  hello:
+    handler: functions/hello/hello.handler
+    warmup: true
+    events:
+      - http:
+          path: hello
+          method: get

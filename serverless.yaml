@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: >
+  Stack used for test Lupe services
+
+service: lupe-service
+
+custom:
+  config: ${file(./config/${opt:stage}.js):config}
+  empty: ""
+  browserify:
+    exclude:
+      - aws-sdk
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: sa-east-1
+  environment:
+    NODE_ENV: ${opt:stage}
+    SERVERLESS_STAGE: ${opt:stage}
+    STAGE: ${opt:stage}
+  iamRoleStatements: ${file(./services-config/iam/roleStatements.yaml)}
+  logRetentionInDays: 3
+
+package:
+  individually: true
+  include:
+    - config
+
+functions: ${file(./services-config/${opt:service}.yaml):functions}
+
+plugins:
+  - serverless-plugin-browserifier
+  - serverless-plugin-warmup
