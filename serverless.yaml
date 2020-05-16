@@ -20,6 +20,8 @@ provider:
     NODE_ENV: ${opt:stage}
     SERVERLESS_STAGE: ${opt:stage}
     STAGE: ${opt:stage}
+    CHAR_BUCKET: ${self:custom.config.charBucket}
+    SOURCE_ENVIRONMENT: ${self:custom.config.sourceEnvironment}
   iamRoleStatements: ${file(./services-config/iam/roleStatements.yaml)}
   logRetentionInDays: 3
 

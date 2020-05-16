@@ -1,11 +1,8 @@
-async function handler (log, event, context) {
+// eslint-disable-next-line func-names
+module.exports.handler = async (event, context) => {
 	console.log('Hello begin')
 	console.log('Context', context)
 	console.log('Event', event)
-
-	// const suuid = event.headers['session-uuid']
-	// const { body } = event.Records[0]
-	// const { env } = JSON.parse(body)
 
 	const sresponse = {
 		statusCode: 200,
@@ -16,20 +13,5 @@ async function handler (log, event, context) {
 		}),
 	}
 
-	// try {
-	// 	console.log({ id }, 'Calling endpoint')
-	// 	await asyncfunction(id, suuid, log, env)
-	// 	console.log({ suuid }, 'Finished call')
-	// } catch (e) {
-	// 	const eresponse = {
-	// 		statusCode: 400300,
-	// 		message: 'FAILED_TO_DELETE',
-	// 		SUUID: suuid,
-	// 	}
-	// 	return response.create(400, eresponse)
-	// }
-
 	return sresponse
 }
-
-module.exports.handler = handler

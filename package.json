@@ -13,9 +13,11 @@
   "author": "lbaldin",
   "license": "ISC",
   "dependencies": {
-    "serverless": "^1.70.1",
+    "aws-sdk": "^2.678.0",
     "browserify": "^16.4.0",
+    "bunyan": "^1.8.12",
     "luxon": "1.19.3",
+    "serverless": "^1.70.1",
     "uuid": "^3.3.3"
   },
   "devDependencies": {

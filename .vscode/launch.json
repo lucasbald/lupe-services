@@ -7,6 +7,32 @@
 		{
 			"type": "node",
 			"request": "launch",
+			"name": "getHeroV1",
+			"program": "C:\\Users\\Lucas Baldin\\AppData\\Roaming\\npm\\node_modules\\serverless\\bin\\serverless",
+			"protocol": "inspector",
+			"env": {
+				"_X_AMZN_TRACE_ID": "1=1",
+				"AWS_XRAY_CONTEXT_MISSING": "LOG_ERROR",
+			},
+			"runtimeArgs": [
+				"--harmony"
+			],
+			"args": [
+				"invoke",
+				"local",
+				"--function",
+				"getHeroV1",
+				"--stage",
+				"dev",
+				"--service",
+				"frontEnd",
+				"--data",
+				"{\"headers\":{\"source-component\":\"some-source-component\"},\"pathParameters\":{\"charName\":\"57951\"}"
+			]
+		},
+		{
+			"type": "node",
+			"request": "launch",
 			"name": "helloV1",
 			"program": "C:\\Users\\Lucas Baldin\\AppData\\Roaming\\npm\\node_modules\\serverless\\bin\\serverless",
 			"protocol": "inspector",
