@@ -1,5 +1,6 @@
 const AWS = require('aws-sdk')
 const bunyan = require('bunyan')
+const response = require('../../lib/responses')
 
 const log = bunyan.createLogger({ name: 'getHeroV1' })
 const s3 = new AWS.S3()
@@ -16,42 +17,15 @@ async function handler (event) {
 	const allKeys = await listAllKeys(params)
 
 	if (!allKeys) {
-		log.info('Get Hero begin1')
-		const eresponse = {
-			status: 400,
-			body: JSON.stringify({
-				message: 'NO_CHAR_FOUND',
-				statusCode: 400001,
-			}),
-		}
-
-		return eresponse
+		return response.defaultErrorResponses.NO_CHAR_FOUND
 	}
 
 	if (!pathParams) {
-		log.info('Get Hero begin2')
-		const eresponse = {
-			status: 400,
-			body: JSON.stringify({
-				message: 'INVALID_QUERY_PARAMS',
-				statusCode: 400002,
-			}),
-		}
-
-		return eresponse
+		return response.defaultErrorResponses.INVALID_QUERY_PARAMS
 	}
 
 	if (!pathParams.heroName) {
-		log.info('Get Hero begin3')
-		const eresponse = {
-			status: 400,
-			body: JSON.stringify({
-				message: 'NO_CHAR_NAME',
-				statusCode: 400003,
-			}),
-		}
-
-		return eresponse
+		return response.defaultErrorResponses.NO_CHAR_NAME
 	}
 
 	params.Key = pathParams.heroName
@@ -60,28 +34,10 @@ async function handler (event) {
 	try {
 		heroData = await s3.getObject(params).promise()
 	} catch (error) {
-		const eresponse = {
-			status: 400,
-			body: JSON.stringify({
-				message: 'NO_CHAR_WITH_THIS_NAME',
-				statusCode: 400004,
-				error: error.message,
-			}),
-		}
-
-		return eresponse
+		return response.createResponse(400, 400004, 'NO_CHAR_WITH_THIS_NAME', error.message)
 	}
 
-	const sresponse = {
-		statusCode: 200,
-		body: JSON.stringify({
-			message: 'CHAR_FOUND',
-			statusCode: 200001,
-			hero: JSON.parse(heroData.Body.toString('ascii')),
-		}),
-	}
-
-	return sresponse
+	return response.createSuccessResponse(200, 200001, 'CHAR_FOUND', JSON.parse(heroData.Body.toString('ascii')))
 }
 
 async function listAllKeys (params) {
@@ -100,7 +56,7 @@ async function listAllKeys (params) {
 
 				if (data.IsTruncated) {
 					s3Params.ContinuationToken = data.NextContinuationToken
-					log.info('get further list...')
+					log.info('Get further list...')
 					listAllKeys(s3Params)
 				}
 			}
