@@ -2,3 +2,9 @@
   Action:
   - ssm:GetParameters
   Resource: "*"
+- Effect: Allow
+  Action:
+  - s3:GetBucketLocation
+  - s3:ListBucket
+  - s3:GetObject
+  Resource: "*"

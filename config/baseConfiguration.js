@@ -6,6 +6,7 @@ function baseConfiguration ({
 		memorySize: 1024,
 		stage,
 		sourceEnvironment: `lupe-service-${stage}`,
+		charBucket: `lupe-${stage}-char`,
 	}
 }
 

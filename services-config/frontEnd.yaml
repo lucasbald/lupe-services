@@ -8,3 +8,10 @@ functions:
       - http:
           path: hello
           method: get
+  getHeroV1:
+    handler: functions/getHero/getHeroV1.handler
+    warmup: true
+    events:
+      - http:
+          path: v1/getHero
+          method: get
