@@ -10,6 +10,7 @@ async function handler (event) {
 	log.info(event, 'Event')
 
 	const pathParams = event.queryStringParameters
+
 	const params = {
 		Bucket: process.env.CHAR_BUCKET,
 	}
@@ -28,7 +29,7 @@ async function handler (event) {
 		return response.defaultErrorResponses.NO_CHAR_NAME
 	}
 
-	params.Key = pathParams.heroName
+	params.Key = `${pathParams.heroName}.json`
 	let heroData
 
 	try {
@@ -37,7 +38,8 @@ async function handler (event) {
 		return response.createResponse(400, 400004, 'NO_CHAR_WITH_THIS_NAME', error.message)
 	}
 
-	return response.createSuccessResponse(200, 200001, 'CHAR_FOUND', JSON.parse(heroData.Body.toString('ascii')))
+	const heroObj = heroData.Body.toString('utf-8')
+	return response.createSuccessResponse(200, 200001, 'CHAR_FOUND', JSON.parse(heroObj))
 }
 
 async function listAllKeys (params) {
