@@ -6,6 +6,11 @@ module.exports.handler = async (event, context) => {
 
 	const sresponse = {
 		statusCode: 200,
+		headers: {
+			'Access-Control-Allow-Headers': 'Content-Type',
+			'Access-Control-Allow-Origin': 'http://localhost:3000',
+			'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+		},
 		body: JSON.stringify({
 			message: 'EVENT_PROCESSED',
 			statusCode: 200001,
