@@ -15,7 +15,7 @@ custom:
 provider:
   name: aws
   runtime: nodejs12.x
-  region: sa-east-1
+  region: us-east-1
   environment:
     NODE_ENV: ${opt:stage}
     SERVERLESS_STAGE: ${opt:stage}

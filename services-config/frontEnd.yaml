@@ -15,3 +15,16 @@ functions:
       - http:
           path: v1/getHero
           method: get
+          cors:
+            origins:
+              - https://www.lup3solutions.com/
+              - https://lup3solutions.com
+              - https://preview.lup3solutions.com/
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
