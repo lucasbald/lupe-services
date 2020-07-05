@@ -8,6 +8,20 @@ functions:
       - http:
           path: hello
           method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Pragma
+              - Cache-Control
+              - Expires
+            allowCredentials: false
+          private: true
   getHeroV1:
     handler: functions/getHero/getHeroV1.handler
     warmup: true
